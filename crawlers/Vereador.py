@@ -1,24 +1,24 @@
 class Vereador:
 
-	nome=None
-	partido=None
-	url_camara=None
-
 	def __init__(self,n,p,url):
 		self.nome=n
 		self.partido=p
 		self.url_camara=url
+		self.apelidos=list()
+		self.termos=list()
+		self.contatos=dict()
+		self.biografia=None
 
 	def __str__(self):
 		return self.nome
 
-	def getNome(self):
-		return self.nome
-
-	def getPartido(self):
-		return self.partido
-	
-	def getUrl(self):
-		return self.url_camara
-
-
+	def resumoVereador(self):
+		resumo=dict()
+		resumo['nome']=self.nome
+		resumo['partido']=self.partido
+		resumo['pagina camara']=self.url_camara
+		resumo['apelidos']=self.apelidos
+		resumo['termos relacionados']=self.termos
+		resumo['dados de contato']=self.contatos
+		resumo['biografia']=self.biografia
+		return resumo
