@@ -2,7 +2,7 @@ import feedparser
 from bs4 import BeautifulSoup
 
 urls=[
-'http://tecnologia.uol.com.br/ultnot/index.xml'
+'https://news.google.com/news/rss/?ned=pt-BR_br&hl=pt-BR'
 ,'http://www.portalconscienciapolitica.com.br/rss/all.xml'
 ,'https://www.reddit.com/r/saopaulo/.rss'
 ,'http://pox.globo.com/rss/g1/sao-paulo/'

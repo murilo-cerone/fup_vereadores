@@ -23,6 +23,7 @@ def getFeeds(whitelist):
             if termo in headline and headline not in interessante_feeds:
           #      print(headline+"  interessante!! por causa do termo: "+termo)
                 interessante_feeds[headline]=link
+                print('INTERESSOU: ',link)
           #      x = input("hammer time")
     return interessante_feeds
 
@@ -53,7 +54,10 @@ def getContent(links):
         url=links[link]
         html=urllib.request.urlopen(url)
         soup=BeautifulSoup(html,"html.parser")
-        doc=getFromG1(soup)
+        if 'g1.globo' in url:
+            doc=getFromG1(soup)
+        else:
+            continue
         #print(doc)
         docx=Documento(doc[0],doc[1],doc[2],link,doc[3],doc[4],doc[5])
         dic_new=docx.resumoDocumento()
@@ -72,4 +76,3 @@ def test():
 #sys.exit(0)
 links = getFeeds(whiteList())
 getContent(links)
-
