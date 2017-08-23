@@ -1,3 +1,4 @@
+import sys
 import tweepy
 from tweepy import OAuthHandler
 
@@ -10,8 +11,11 @@ auth = OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_secret)
 api = tweepy.API(auth)
 
-user = api.get_user('AndreSantosJPMM')
-
+user = api.get_user('adoteumver_sp')
+print(dir(user))
+print(user.lists_memberships())
+print(user.lists())
+sys.exit(0)
 print(user.id)
 
 twts=api.user_timeline(user.id,count=20)
