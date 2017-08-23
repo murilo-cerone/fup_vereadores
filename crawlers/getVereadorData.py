@@ -1,4 +1,6 @@
 #import urllib3
+#testando
+#testando2
 import urllib.request
 from Vereador import Vereador
 import re
@@ -16,7 +18,7 @@ def dicionarioUrls(src_file="urls.txt"):
 			urls[kv[0]]=kv[1].rstrip()
 		#print(urls.keys())
 		return urls
-			
+
 	except:
 		print('Erro ao ler o arquivo ',src_file)
 		return None
@@ -48,7 +50,7 @@ def getVereadores():
 		v=Vereador(nome_vereador,sigla_partido,pagina_vereador)
 		vereadoresL.append(v)
 	return vereadoresL
-		
+
 
 def getVereadorDetail():
 #ToDo - Tratar os contatos ?
@@ -67,7 +69,7 @@ def getVereadorDetail():
 		pagina_vereador=BeautifulSoup(resposta,"html.parser")
 		#print(pagina_vereador.prettify())
 		main=pagina_vereador.findAll('div',{'class':'cf','id':'main','role':'main'})
-		
+
 		#Pegar os contatos disponivies
 		contatos=main[0].find('div',{'class':'vereador-data'}).findAll('li')
 		for contato in contatos:
@@ -80,8 +82,8 @@ def getVereadorDetail():
 		vereador.biografia=biografia
 		json.dump(vereador.resumoVereador(),fhand,ensure_ascii=False)
 		fhand.write('\n')
-		
-	return vereadores	
+
+	return vereadores
 
 
 # Metodos para testes
@@ -91,7 +93,7 @@ def testadorParte1():
 		x.apelidos.append('Ze do caixao')
 		x.termos.append('Lava Jato')
 		#print(x,x.url_camara,x.partido,x.apelidos,x.termos)
-		
+
 
 
 def testadorParte2():
@@ -103,7 +105,7 @@ def testadorParte2():
 
 #Fim dos metodos de teste
 
-#testadorParte1()	
+#testadorParte1()
 vereadoresAtualizados=testadorParte2()
 #fhand=open('teste.json','w')
 #for vereador in vereadores:
