@@ -11,9 +11,25 @@ auth = OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_secret)
 api = tweepy.API(auth)
 
-user = api.get_user('adoteumver_sp')
-twts=api.user_timeline(user.id,count=200)
+def showTwts(twts):
+	for t in twts:
+		#print(user.name," tweetou:")
+		print (t.user.name,": ",t.text,"[",t.created_at,"]")
+		#status_detail(t)
 
+
+twts=api.search('@adoteumver_sp',rpp=100,show_user=True)
+showTwts(twts)
+sys.exit(0)
+
+user = api.get_user('adoteumver_sp')
+print(dir(user))
+print(user.lists_memberships())
+print(user.lists())
+
+print(user.id)
+
+twts=api.user_timeline(user.id,count=20)
 
 def status_detail(stat):
     #print(dir(stat))
@@ -49,7 +65,3 @@ def status_detail(stat):
     print("#########################################################################################")
 
 
-for t in twts:
-    print(user.name," tweetou:")
-    print (t.text,"[",t.created_at,"]")
-    #status_detail(t)
