@@ -17,8 +17,7 @@ def getText(url):
 		print("Erro ao abrir a url",url)
 		return None
 	try:
-		#soup=BeautifulSoup(html,"html.parser")
-		soup=BeautifulSoup(html)
+		soup=BeautifulSoup(html,"html.parser")
 		return soup
 		#textos = soup.findAll(recursive=False,text=True)
 	except:
@@ -26,7 +25,6 @@ def getText(url):
 		return None
 	
 def getStrings(root):
-	
 	tag=root.html
 	print(tag.attrs)
 	#return 
@@ -45,15 +43,5 @@ def getStrings(root):
 			#else:                     # it's a string!
 				#yield s
 
-for url in getUrls():
-	t = getText(url)
-	if t:
-		t2 = getStrings(t)
-	else:
-		continue
-	print (url,':\n')
-	for x in t2:
-		print(x)
-	break
-	
-	
+
+				
