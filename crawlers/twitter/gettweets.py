@@ -53,3 +53,4 @@ for t in twts:
     print(user.name," tweetou:")
     print (t.text,"[",t.created_at,"]")
     #status_detail(t)
+	
