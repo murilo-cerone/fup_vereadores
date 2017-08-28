@@ -4,14 +4,38 @@ import re
 
 fhand=open('feeds.txt','r')
 
+def visible(element):
+	if element.parent.name in ['style','script','[document]','head','title']:
+		return False
+	elif re.match('<!--.*-->',str(element.encode('utf-8'))):
+		return False
+	else:
+		return True
+
 def getUrls():
 	urls=list()
 	for line in fhand:
 		x=line.split('-->')
 		urls.append(x[1].strip())
-	return urls 
-	
-def getText(url):
+	return urls
+
+def readG1Article(sopa):
+	try:
+		artigo = sopa.findAll("article")
+		if len(artigo)==1:
+			textos=artigo[0].findAll(text=True)
+			#print (textos)
+			resultado=filter(visible,textos)
+			#print(resultado)
+			l=list(resultado)
+			print(l)
+			for t in l:
+				print(t)
+	except:
+		print("Failed to read G1 article")
+
+
+def getSoup(url):
 	try:
 		html=urllib.request.urlopen(url)
 	except:
@@ -24,16 +48,7 @@ def getText(url):
 	except:
 		print("erro ao fazer parsing ")
 		return None
-	
-def visible(element):
-	if element.parent.name in ['style','script','[document]','head','title']:
-		return False
-	elif re.match('<!--.*-->',str(element.encode('utf-8'))):
-		return False
-	else:
-		return True
-		
-	
+
 def getStrings(root):
 	conteudos=list()
 	if root:
@@ -45,20 +60,22 @@ def getStrings(root):
 			if len(text.strip())>100:
 				print(text)
 				print('\n------------------------------------------------------------------\n')
-		
+
 		return
 		tags=tag.descendants
 		for t in tags:
 			x = input('')
 			print(t)
-	return 
+	return
 
 
-				
 urls=getUrls()
 i=0
 for url in urls:
-	getStrings(getText(url))
+	print("******************************************************************")
+	print(url)
+	readG1Article(getSoup(url))
+	print("******************************************************************")
 	i=i+1
-	if i>2:
+	if i>9:
 		break

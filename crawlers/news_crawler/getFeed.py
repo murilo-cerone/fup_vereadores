@@ -2,11 +2,12 @@ import feedparser
 from bs4 import BeautifulSoup
 
 urls=[
-'https://news.google.com/news/rss/?ned=pt-BR_br&hl=pt-BR'
+'http://pox.globo.com/rss/g1/sao-paulo/'
+,'https://news.google.com/news/rss/?ned=pt-BR_br&hl=pt-BR'
 ,'http://www.portalconscienciapolitica.com.br/rss/all.xml'
 ,'https://www.reddit.com/r/saopaulo/.rss'
-,'http://pox.globo.com/rss/g1/sao-paulo/'
 ]
+
 fhand=open('feeds.txt','w')
 for url in urls:
 	feed=feedparser.parse(url,'charset=utf8')
