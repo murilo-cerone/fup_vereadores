@@ -1,0 +1,11 @@
+{
+nome:<nome>
+id_camara:<>
+ultima_atualizacao:<>
+ativo:<>
+partido:<>
+biografia:<>
+gastos:[{cnpj:<>,valor:<>,data:<>,descricao:<>}]
+projetos:[{projeto...}]
+postagens:[{conteudo:<>,data:<>,origem:<>}]
+}
