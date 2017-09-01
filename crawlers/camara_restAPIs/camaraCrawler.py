@@ -3,6 +3,7 @@ import json
 import datetime
 import re
 import pprint
+import fileuploader as fup
 
 
 def getOcupacaoGabinete():
@@ -60,6 +61,12 @@ def getGastos(ano, mes):
 			
 			
 
+def gastosToFile(gastosList):
+	fhand=open("gastos.json","w")
+	for item in gastosList:
+		fhand.write(str(item)+"\n")
+	fhand.close()
+	
 def testeGetGastos():
 	gastosList=list()
 	for i in range(1,datetime.datetime.today().month):
@@ -68,10 +75,8 @@ def testeGetGastos():
 			gastosList.append(item)
 		print(i," - ",len(gastosList))
 	
-	fhand=open("gastos.json","w")
-	for gasto in gastosList:
-		fhand.write(str(gasto)+"\n")
-	fhand.close()
+	#gastosToFile(gastosList)
+	fup.insertGastos(gastosList)
 		
 
 testeGetGastos()
