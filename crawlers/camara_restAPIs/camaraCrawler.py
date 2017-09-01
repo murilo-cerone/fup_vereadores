@@ -41,5 +41,42 @@ def queryjData(jData):
         if d['vereador']=='CAIO MIRANDA CARNEIRO':
             pprint.pprint(d)
 
-jData=getOcupacaoGabinete()
-queryjData(jData)
+def getGastos(ano, mes):
+	url="https://app-sisgvconsulta-prd.azurewebsites.net/ws/ws2.asmx/ObterDebitoVereadorJSON?ano=<ano>&mes=<mes>"
+	if ano.isdigit() and mes.isdigit():
+		if int(ano)>datetime.datetime.today().year:
+			print("ano invalido! (",ano,")")
+		elif int(mes) not in range(1,13) or int(mes)>datetime.datetime.today().month:
+			print("mes invalido! (",mes,")")
+		else:
+			url=url.replace("<ano>",ano)
+			url=url.replace("<mes>",mes)
+			print(url)
+			resposta=urllib.request.urlopen(url).read()
+			jData=json.loads(resposta)
+			return jData
+	else:
+		print("Ano ou mes invalidos!\nano: ",ano,"\tmes: ",mes)
+			
+			
+
+def testeGetGastos():
+	gastosList=list()
+	for i in range(1,datetime.datetime.today().month):
+		d = getGastos(str(datetime.datetime.today().year),str(i))
+		for item in d:
+			gastosList.append(item)
+		print(i," - ",len(gastosList))
+	
+	fhand=open("gastos.json","w")
+	for gasto in gastosList:
+		fhand.write(str(gasto)+"\n")
+	fhand.close()
+		
+
+testeGetGastos()
+			
+# funcoes de testes!
+def testeOcupacaoGabinete():
+	jData=getOcupacaoGabinete()
+	queryjData(jData)
